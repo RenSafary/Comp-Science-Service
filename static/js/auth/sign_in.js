@@ -1,0 +1,45 @@
+const ws = new WebSocket("ws://localhost:8080/sign_in_ws");
+const form = document.getElementById("authForm");
+const statusP = document.getElementById("status");
+
+ws.onopen = () => {
+    console.log("WebSocket connected");
+};
+
+ws.onmessage = (event) => {
+    const responseText = event.data;
+    if (responseText.trim() === "success") {
+        statusP.style.color = "green";
+        statusP.textContent = "Авторизация успешна!";
+    } else {
+        statusP.style.color = "red";
+        statusP.textContent = "Ошибка: " + responseText;
+    }
+};
+
+ws.onerror = (error) => {
+    console.error("WebSocket error:", error);
+    statusP.style.color = "red";
+    statusP.textContent = "Ошибка соединения с сервером";
+};
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const usernameInput = document.getElementById("username").value;
+    const passwordInput = document.getElementById("password").value;
+
+    const userData = {
+        username: usernameInput,
+        password: passwordInput
+    };
+
+    if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify(userData));
+        statusP.style.color = "black";
+        statusP.textContent = "Отправка данных...";
+    } else {
+        statusP.style.color = "red";
+        statusP.textContent = "Соединение не установлено";
+    }
+});
