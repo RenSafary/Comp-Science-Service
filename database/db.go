@@ -6,15 +6,20 @@ import (
 	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 type SchoolDB struct {
-	DB *sql.DB
-	// Users *Users
+	DB    *sql.DB
+	Users *Users
 }
 
 func getEnvVariablesDB() string {
+	if err := godotenv.Load(); err != nil {
+		log.Println("Warning: .env file not found")
+	}
+
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
 	db_name := os.Getenv("DB_NAME")
@@ -22,7 +27,10 @@ func getEnvVariablesDB() string {
 	port := os.Getenv("DB_PORT")
 	sslmode := os.Getenv("DB_SSLMODE")
 
-	connStr := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=%s search_path=public", user, password, db_name, host, port, sslmode)
+	fmt.Printf("DEBUG CONN: Host='%s', Port='%s', DB='%s', User='%s' Password='%s'\n", host, port, db_name, user, password)
+
+	connStr := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=%s",
+		user, password, db_name, host, port, sslmode)
 
 	return connStr
 }
@@ -40,5 +48,8 @@ func Conn() (*SchoolDB, error) {
 		return nil, err
 	}
 
-	return &SchoolDB{DB: db}, nil
+	return &SchoolDB{
+		DB:    db,
+		Users: UsersInit(db),
+	}, nil
 }
