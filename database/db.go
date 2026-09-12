@@ -27,8 +27,6 @@ func getEnvVariablesDB() string {
 	port := os.Getenv("DB_PORT")
 	sslmode := os.Getenv("DB_SSLMODE")
 
-	fmt.Printf("DEBUG CONN: Host='%s', Port='%s', DB='%s', User='%s' Password='%s'\n", host, port, db_name, user, password)
-
 	connStr := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=%s",
 		user, password, db_name, host, port, sslmode)
 
