@@ -48,14 +48,13 @@ func (s *AuthConf) SignUp(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
-		log.Println(user.Class, user.FirstName, user.LastName, user.Password)
 		result := s.DB.Users.CheckIfUserExists(user.FirstName, user.LastName, user.Username, user.Password, user.Class)
-		if result == "Success" {
-			response := []byte("success")
-			if err := ws.WriteMessage(msgType, response); err != nil {
-				log.Println(err)
-				break
-			}
+
+		response := []byte(result)
+
+		if err := ws.WriteMessage(msgType, response); err != nil {
+			log.Println(err)
+			break
 		}
 	}
 }
