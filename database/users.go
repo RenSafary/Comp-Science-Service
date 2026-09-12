@@ -38,7 +38,7 @@ func (d *Users) CheckIfUserExists(FirstName, LastName, username, password, class
 
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 		if err != nil {
-			log.Println("Ошибка хеширования пароля:", err)
+			log.Println("Error hashing pasword:", err)
 			return "Security error"
 		}
 
