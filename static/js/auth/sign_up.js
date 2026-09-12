@@ -10,7 +10,11 @@ ws.onmessage = (event) => {
     const responseText = event.data;
     if (responseText.trim() === "success") {
         statusP.style.color = "green";
-        statusP.textContent = "Регистрация успешна!";
+        statusP.textContent = "Регистрация успешна! Перенаправление...";
+        
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 1500);
     } else {
         statusP.style.color = "red";
         statusP.textContent = "Ошибка: " + responseText;
