@@ -39,17 +39,17 @@ func (d *Users) CheckIfUserExists(FirstName, LastName, username, password, class
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 		if err != nil {
 			log.Println("Error hashing pasword:", err)
-			return "Security error"
+			return "security error"
 		}
 
 		_, err = d.DB.Exec(query, class, FirstName, LastName, hashedPassword, false, username)
 		if err != nil {
 			log.Println("Error adding a user", err)
-			return "Could not add the user"
+			return "could not add the user"
 		}
 
-		return "Success"
+		return "success"
 	}
 
-	return "User already exists"
+	return "user already exists"
 }
