@@ -18,7 +18,7 @@ type UserSignUp struct {
 func (s *AuthConf) SignUpPage(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("templates/auth/sign_up.html")
 	if err != nil {
-		log.Println("Could not parse sign_in.html:", err)
+		log.Println("Could not parse sign_up.html:", err)
 		return
 	}
 
@@ -28,7 +28,7 @@ func (s *AuthConf) SignUpPage(w http.ResponseWriter, r *http.Request) {
 func (s *AuthConf) SignUp(w http.ResponseWriter, r *http.Request) {
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Println("Sign-In websocket err:", err)
+		log.Println("Sign up websocket err:", err)
 		return
 	}
 	defer ws.Close()
