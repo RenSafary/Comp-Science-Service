@@ -34,8 +34,8 @@ func main() {
 	r.HandleFunc("/sign_in", h.SignInPage).Methods("GET")
 	r.HandleFunc("/sign_in_ws", h.SignIn)
 
-	r.HandleFunc("/sign_up", h.SignInPage).Methods("GET")
-	r.HandleFunc("/sign_up_ws", h.SignIn)
+	r.HandleFunc("/sign_up", h.SignUpPage).Methods("GET")
+	r.HandleFunc("/sign_up_ws", h.SignUp)
 
 	ip := "http://127.0.0.1"
 	port := ":8080"
