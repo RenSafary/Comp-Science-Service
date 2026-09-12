@@ -74,3 +74,15 @@ button:hover {
     margin-top: 15px;
     font-size: 14px;
 }
+
+a {
+    display: block;         
+    text-align: center;      
+    text-decoration: none;   
+    color: #333333;          
+    margin-top: 15px;        
+}
+
+a:hover {
+    text-decoration: underline; 
+}
