@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="/static/css/auth/sign_up.css">
+</head>
+<body>
+    <div class="login-card">
+        <h2>Регистрация</h2>
+        <form id="authForm">
+            <div class="input-group">
+                <label for="firstName">Имя</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="input-group">
+                <label for="lastName">Фамилия</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="input-group">
+                <label for="class">Класс</label>
+                <input type="text" id="class" required>
+            </div>
+            <div class="input-group">
+                <label for="username">Имя пользователя</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <p id="status"></p>
+    </div>
+
+    <script src="/static/js/auth/sign_up.js"></script>
+</body>
+</html>
