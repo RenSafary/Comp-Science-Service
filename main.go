@@ -37,6 +37,10 @@ func main() {
 	r.HandleFunc("/sign_up", h.SignUpPage).Methods("GET")
 	r.HandleFunc("/sign_up_ws", h.SignUp)
 
+	r.HandleFunc("/setcookie", auth.SetCookieHandler).Methods("POST")
+
+	//
+
 	ip := "http://127.0.0.1"
 	port := ":8080"
 
