@@ -8,11 +8,11 @@ import (
 )
 
 type UserSignUp struct {
-	Class     string
-	FirstName string
-	LastName  string
-	Username  string
-	Password  string
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Class     string `json:"class"`
+	Username  string `json:"username"`
+	Password  string `json:"password"`
 }
 
 func (s *AuthConf) SignUpPage(w http.ResponseWriter, r *http.Request) {
@@ -49,6 +49,7 @@ func (s *AuthConf) SignUp(w http.ResponseWriter, r *http.Request) {
 		}
 
 		result := s.DB.Users.CreateUser(user.FirstName, user.LastName, user.Username, user.Password, user.Class)
+		log.Println(result)
 
 		response := []byte(result)
 
