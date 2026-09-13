@@ -1,4 +1,4 @@
-const ws = new WebSocket("ws://localhost:8080/sign_in_ws");
+const ws = new WebSocket("ws://localhost:8080/sign_up_ws");
 const form = document.getElementById("authForm");
 const statusP = document.getElementById("status");
 
