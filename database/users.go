@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"errors"
 	"log"
 
 	"golang.org/x/crypto/bcrypt"
@@ -52,4 +53,27 @@ func (d *Users) CreateUser(FirstName, LastName, username, password, class string
 	}
 
 	return "user already exists"
+}
+
+func (d *Users) VerifyPassword(username, password string) (bool, error) {
+	var hashedPassword string
+
+	query := `SELECT password FROM users WHERE username = $1`
+	err := d.DB.QueryRow(query, username).Scan(&hashedPassword)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, errors.New("user not found")
+		}
+		return false, err
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+	if err != nil {
+		if errors.Is(err, bcrypt.ErrMismatchedHashAndPassword) {
+			return false, nil
+		}
+		return false, err
+	}
+
+	return true, nil
 }
