@@ -50,15 +50,34 @@ ws.onerror = (error) => {
     statusP.textContent = "Ошибка соединения с сервером";
 };
 
+const togglePasswordBtn = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("password");
+
+if (togglePasswordBtn) {
+    togglePasswordBtn.addEventListener("click", () => {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+        togglePasswordBtn.textContent = type === "password" ? "Показать" : "Скрыть";
+    });
+}
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    const password = passwordInput.value;
+
+    if (password.length < 8) {
+        statusP.style.color = "red";
+        statusP.textContent = "Ошибка: пароль должен содержать минимум 8 символов";
+        return;
+    }
 
     const userData = {
         first_name: document.getElementById("firstName").value,
         last_name: document.getElementById("lastName").value,
         class: document.getElementById("class").value,
         username: document.getElementById("username").value,
-        password: document.getElementById("password").value
+        password: password
     };
 
     if (ws.readyState === WebSocket.OPEN) {
