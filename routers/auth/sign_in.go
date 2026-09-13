@@ -23,6 +23,12 @@ type User struct {
 }
 
 func (s *AuthConf) SignInPage(w http.ResponseWriter, r *http.Request) {
+	_, err := r.Cookie("session_token")
+	if err == nil {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
 	tmpl, err := template.ParseFiles("templates/auth/sign_in.html")
 	if err != nil {
 		log.Println("Could not parse sign_in.html:", err)
