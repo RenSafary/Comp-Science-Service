@@ -16,6 +16,12 @@ type UserSignUp struct {
 }
 
 func (s *AuthConf) SignUpPage(w http.ResponseWriter, r *http.Request) {
+	_, err := r.Cookie("session_token")
+	if err == nil {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
 	tmpl, err := template.ParseFiles("templates/auth/sign_up.html")
 	if err != nil {
 		log.Println("Could not parse sign_up.html:", err)
