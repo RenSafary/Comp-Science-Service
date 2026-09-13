@@ -25,12 +25,12 @@ func (d *Users) CheckUserPass(username, password string) error {
 func (d *Users) CreateUser(FirstName, LastName, username, password, class string) string {
 	var notExists bool
 
-	query := `SELECT NOT EXISTS(SELECT 1 FROM users WHERE first_name = $1 AND last_name = $2 AND class = $1 AND username = $3)`
+	query := `SELECT NOT EXISTS(SELECT 1 FROM users WHERE first_name = $1 AND last_name = $2 AND class = $3 AND username = $4)`
 
-	err := d.DB.QueryRow(query, FirstName, LastName, username).Scan(&notExists)
+	err := d.DB.QueryRow(query, FirstName, LastName, class, username).Scan(&notExists)
 	if err != nil {
-		log.Println(sql.ErrNoRows.Error())
-		return "No rows"
+		log.Println("Database query error:", err)
+		return "database error"
 	}
 
 	if notExists {
