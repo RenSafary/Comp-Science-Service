@@ -13,7 +13,7 @@ body {
     padding: 30px 40px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 340px;
+    width: 380px; 
     box-sizing: border-box;
 }
 
@@ -35,7 +35,7 @@ label {
     font-size: 13px;
 }
 
-input {
+input, select {
     width: 100%;
     padding: 9px 12px;
     border: 1px solid #cccccc;
@@ -43,14 +43,38 @@ input {
     box-sizing: border-box;
     font-size: 14px;
     transition: border-color 0.2s;
+    background-color: #fff;
 }
 
-input:focus {
+input:focus, select:focus {
     border-color: #667eea;
     outline: none;
 }
 
-button {
+.password-wrapper {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.password-wrapper input {
+    flex: 1; 
+}
+
+.password-wrapper button {
+    width: auto;
+    margin-top: 0;
+    padding: 0 12px;
+    background-color: #e2e8f0;
+    color: #333333;
+    font-size: 13px;
+}
+
+.password-wrapper button:hover {
+    background-color: #cbd5e1;
+}
+
+button[type="submit"] {
     width: 100%;
     padding: 11px;
     background-color: #667eea;
@@ -64,7 +88,7 @@ button {
     margin-top: 10px;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background-color: #5563c1;
 }
 

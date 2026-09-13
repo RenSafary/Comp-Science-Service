@@ -19,7 +19,14 @@
             </div>
             <div class="input-group">
                 <label for="class">Класс</label>
-                <input type="text" id="class" required>
+                <select id="class" required>
+                    <option value="" disabled selected>Выберите класс</option>
+                    <option value="7А">7А</option>
+                    <option value="7Б">7Б</option>
+                    <option value="7В">7В</option>
+                    <option value="7Г">7Г</option>
+                    <option value="7Д">7Д</option>
+                </select>
             </div>
             <div class="input-group">
                 <label for="username">Имя пользователя</label>
@@ -27,7 +34,10 @@
             </div>
             <div class="input-group">
                 <label for="password">Пароль</label>
-                <input type="password" id="password" required>
+                <div class="password-wrapper">
+                    <input type="password" id="password" required>
+                    <button type="button" id="togglePassword">Показать</button>
+                </div>
             </div>
             <button type="submit">Зарегистрироваться</button>
         </form>
