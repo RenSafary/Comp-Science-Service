@@ -48,7 +48,7 @@ func (s *AuthConf) SignUp(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
-		result := s.DB.Users.CheckIfUserExists(user.FirstName, user.LastName, user.Username, user.Password, user.Class)
+		result := s.DB.Users.CreateUser(user.FirstName, user.LastName, user.Username, user.Password, user.Class)
 
 		response := []byte(result)
 

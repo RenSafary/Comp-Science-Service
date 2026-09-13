@@ -22,7 +22,7 @@ func (d *Users) CheckUserPass(username, password string) error {
 */
 
 // Sign up
-func (d *Users) CheckIfUserExists(FirstName, LastName, username, password, class string) string {
+func (d *Users) CreateUser(FirstName, LastName, username, password, class string) string {
 	var notExists bool
 
 	query := `SELECT NOT EXISTS(SELECT 1 FROM users WHERE first_name = $1 AND last_name = $2 AND class = $1 AND username = $3)`
