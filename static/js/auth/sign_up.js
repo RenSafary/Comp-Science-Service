@@ -6,15 +6,38 @@ ws.onopen = () => {
     console.log("WebSocket connected");
 };
 
-ws.onmessage = (event) => {
+ws.onmessage = async (event) => {
     const responseText = event.data;
     if (responseText.trim() === "success") {
         statusP.style.color = "green";
-        statusP.textContent = "Регистрация успешна! Перенаправление...";
+        statusP.textContent = "Регистрация успешна! Создание сессии...";
         
-        setTimeout(() => {
-            window.location.href = "/";
-        }, 1500);
+        const username = document.getElementById("username").value;
+
+        try {
+            const cookieResponse = await fetch("/setcookie", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username: username })
+            });
+
+            if (cookieResponse.ok) {
+                statusP.textContent = "Перенаправление...";
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1000);
+            } else {
+                statusP.style.color = "red";
+                statusP.textContent = "Ошибка при сохранении сессии";
+            }
+        } catch (err) {
+            console.error("Fetch error:", err);
+            statusP.style.color = "red";
+            statusP.textContent = "Ошибка сети при установке куки";
+        }
+
     } else {
         statusP.style.color = "red";
         statusP.textContent = "Ошибка: " + responseText;
